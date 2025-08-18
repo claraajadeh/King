@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Website Under KING Surveillance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;background:#000;color:#39ff14;font-family:'Share Tech Mono',monospace;overflow:hidden}
+    .container{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center;padding:20px}
+    img{width:160px;height:160px;border-radius:50%;border:3px solid #39ff14;box-shadow:0 0 30px #39ff14;margin-bottom:20px}
+    h1{font-family:'Orbitron',sans-serif;font-size:28px;color:#39ff14;margin:0;text-shadow:0 0 15px #39ff14,0 0 30px #00ffcc}
+    p{color:#ccc;font-size:14px;max-width:650px;margin-top:10px;line-height:1.5}
+    audio{margin-top:20px;filter:drop-shadow(0 0 8px #39ff14)}
+    .matrix{position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:0.15}
+    canvas{width:100%;height:100%}
+  </style>
+</head>
+<body>
+  <div class="matrix"><canvas id="matrixCanvas"></canvas></div>
+  <div class="container">
+    <img src="https://files.catbox.moe/fm8lqg.png" alt="KING Avatar">
+    <h1>THIS WEBSITE IS UNDER KING'S SURVEILLANCE</h1>
+    <p>Your every move is being tracked. All connections, data transfers, and digital footprints are under the relentless watch of the KING Surveillance System. There is no escape, no hiding — your presence has been marked.</p>
+    <audio controls autoplay loop>
+      <source src="https://files.catbox.moe/ffpay3.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+  <script>
+    (function(){
+      const canvas=document.getElementById('matrixCanvas');
+      const ctx=canvas.getContext('2d');
+      const letters="アァイィウヴエェオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトド0123456789".split("");
+      let drops=[];
+      function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;drops=Array(Math.floor(canvas.width/14)).fill(1)}
+      window.addEventListener('resize',resize);resize();
+      function draw(){
+        ctx.fillStyle='rgba(0,0,0,0.05)';ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle='#39ff14';ctx.font='14px Share Tech Mono';
+        for(let i=0;i<drops.length;i++){
+          const text=letters[Math.floor(Math.random()*letters.length)];
+          ctx.fillText(text,i*14,drops[i]*14);
+          if(drops[i]*14>canvas.height && Math.random()>0.975) drops[i]=0;
+          drops[i]++;
+        }
+      }
+      setInterval(draw,45);
+    })();
+  </script>
+</body>
+</html>
